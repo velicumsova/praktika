@@ -8,7 +8,7 @@ ApplicationWindow {
     width: 700
     height: 500
     color: Qt.rgba(0.15, 0.15, 0.15, 1)
-    title: "Распознавание погоды и растений на изображениях"
+    title: "Распознавание растений на изображениях"
 
     Rectangle {
         anchors.fill: parent

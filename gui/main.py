@@ -12,14 +12,14 @@ from PySide2.QtCore import Slot, QObject
 class NetBackend(QObject):
     def __init__(self) -> None:
         super().__init__()
-        self.plants_model = tf.keras.models.load_model('trees_and_plants.h5')
-        self.plants_classes = os.listdir("dataset")
+        self.plants_model = tf.keras.models.load_model('plants.h5')
+        self.plants_classes = os.listdir("dataset/train")
 
     @Slot(str, result=str)
     def predict(self, filepath: str):
         _fp = filepath[8:].replace('/', '\\')
         image = Image.open(_fp).convert('RGB')
-        image_array = np.array(image.resize((416, 315)))
+        image_array = np.array(image.resize((64, 64)))
         preds = self.plants_model.predict(np.expand_dims(image_array, axis=0))
         _id = preds.argmax()
         _name = self.plants_classes[_id]
